@@ -13,7 +13,7 @@ public class PropertiesConfiguration {
     private PropertiesConfiguration() {
     }
 
-    public static String getCardDeckUrl(){
+    public static String getCardDeckUrl() {
         return getProperty("card.deck.page.url");
     }
 
