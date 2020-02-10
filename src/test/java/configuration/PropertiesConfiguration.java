@@ -10,12 +10,11 @@ public class PropertiesConfiguration {
 
     private static Properties prop = new Properties();
 
-    private PropertiesConfiguration() {
-    }
+    private PropertiesConfiguration() {}
 
-    public static String getCardDeckUrl() {
-        return getProperty("card.deck.page.url");
-    }
+    public static String getCardDeckUrl() { return getProperty("card.deck.api.url"); }
+
+    public static String getShuffleUrlPath() { return getProperty("card.deck.api.shuffle.path"); }
 
     @SneakyThrows
     private static String getProperty(String property) {

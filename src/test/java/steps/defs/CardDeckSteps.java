@@ -13,12 +13,10 @@ public class CardDeckSteps {
 
     @And("validate that deck has all parameters")
     public void validateDeckParams() {
-
     }
 
     @When("shuffle another deck")
     public void shuffleAnotherDeck() {
-
     }
 
     @Then("validate that deck is unique")
