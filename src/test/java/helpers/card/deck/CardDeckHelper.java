@@ -1,7 +1,6 @@
 package helpers.card.deck;
 
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 import static configuration.PropertiesConfiguration.getShuffleUrlPath;
@@ -12,31 +11,29 @@ public class CardDeckHelper {
     private static final String DECK_COUNT_PARAM = "deck_count";
     private static final String DRAW_CARD_COUNT = "count";
 
-    public Response shuffleCards(final int deckCount) {
+    public String shuffleCards(final int deckCount) {
         var url = buildDeckUrl().path(getShuffleUrlPath())
                 .queryParam(DECK_COUNT_PARAM, deckCount).build().toUriString();
 
         return sendGetRequest(url)
-                .and().extract().response();
+                .and().extract().response().getBody().asString();
     }
 
-    public Response shuffleCards() {
-        return shuffleCards(1);
-    }
+    public String shuffleCards() { return shuffleCards(1); }
 
-    public Response drawCard(final String deckId, final int deckNumber) {
+    public String drawCard(final String deckId, final int deckNumber) {
         var url = buildDeckUrl().path("api/deck/" + deckId + "/draw/")
                 .queryParam(DRAW_CARD_COUNT, deckNumber).build().toUriString();
 
         return sendGetRequest(url)
-                .and().extract().response();
+                .and().extract().response().getBody().asString();
     }
 
-    public Response reshuffleCards(final String deckId) {
+    public String reshuffleCards(final String deckId) {
         var url = buildDeckUrl().path("api/deck/" + deckId + "/shuffle/").build().toUriString();
 
         return sendGetRequest(url)
-                .and().extract().response();
+                .and().extract().response().getBody().asString();
     }
 
     private ValidatableResponse sendGetRequest(String url) {
