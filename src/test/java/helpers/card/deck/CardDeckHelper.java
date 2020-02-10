@@ -34,4 +34,13 @@ public class CardDeckHelper {
                 .then().statusCode(200)
                 .and().extract().response();
     }
+
+    public Response reshuffleCards (final String deckId) {
+        var url = buildDeckUrl().path("api/deck/" + deckId + "/shuffle/").build().toUriString();
+
+        return RestAssured.given()
+                .get(url)
+                .then().statusCode(200)
+                .and().extract().response();
+    }
 }
