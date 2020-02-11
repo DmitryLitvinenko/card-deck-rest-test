@@ -2,4 +2,4 @@
 
 Technologies: Cucumber, Maven, RestAssured, Gson;
 
-TODO: allure, parallel run
+TODO: allure, parallel run, test listeners;
