@@ -16,8 +16,9 @@ public class CardDeckSteps {
     private String deckResponse;
     private String anotherDeckResponse;
 
-    @Given("shuffle {word} {int} deck(s)")
+    @Given("^shuffle {word} {int} deck(s)$")
     public void shuffleDeck(final String option, final int deckAmount) {
+        //todo add capture group, to handle only new and another
         String response;
         response = cardDeck.shuffleCards(deckAmount);
 
