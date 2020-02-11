@@ -16,7 +16,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
         <aspectj.version>1.9.4</aspectj.version>
+        <java.version>11</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -83,6 +85,11 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber-jvm</artifactId>
+            <version>2.0-BETA6</version>
+        </dependency>
         <!--Jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -114,28 +121,6 @@
             <version>1.0.0</version>
             <scope>test</scope>
         </dependency>
-        <!--Allure reporting-->
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit-platform</artifactId>
-            <version>2.13.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
-            <version>2.13.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-selenide</artifactId>
-            <version>2.13.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-junit-adaptor</artifactId>
-            <version>1.5.2</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -144,7 +129,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <release>11</release>
+                    <release>${java.version}</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -174,14 +159,6 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
-            </plugin>
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
-                <configuration>
-                    <reportVersion>2.4.1</reportVersion>
-                </configuration>
             </plugin>
         </plugins>
     </build>
