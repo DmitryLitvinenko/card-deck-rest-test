@@ -4,7 +4,11 @@
 Feature: Card deck test
 
   @uniqueDeck
-  Scenario: Check that additional deck is unique
-    Given shuffle new 10 decks
-    When shuffle another 10 decks
+  Scenario Outline: Check that any new deck is unique
+    Given shuffle new <new_deck_amount> decks
+    When shuffle another <another_deck_amount> decks
     Then validate that additional deck is unique
+    Examples:
+      | new_deck_amount | another_deck_amount |
+      | 3               | 3                   |
+      | 1               | 6                   |
