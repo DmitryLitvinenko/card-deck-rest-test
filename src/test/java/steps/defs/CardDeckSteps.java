@@ -16,8 +16,8 @@ public class CardDeckSteps {
     private String deckResponse;
     private String anotherDeckResponse;
 
-    @Given("shuffle {string} {int} deck(s)")
-    public void shuffleDeck(final String option, int deckAmount) {
+    @Given("shuffle {word} {int} deck(s)")
+    public void shuffleDeck(final String option, final int deckAmount) {
         String response;
         response = cardDeck.shuffleCards(deckAmount);
 
@@ -31,7 +31,7 @@ public class CardDeckSteps {
         } else {
             anotherDeckResponse = response;
             assertThat(anotherDeckResponse)
-                    .withFailMessage("Additional deck is null").isNotNull();
+                    .withFailMessage("Another deck is null").isNotNull();
         }
     }
 
