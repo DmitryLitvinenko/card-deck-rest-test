@@ -4,9 +4,7 @@
 Feature: Card deck test
 
   @uniqueDeck
-  Scenario: Check that new deck is unique
-
-    Given shuffled deck
-    And validate that deck has all parameters
-    When shuffle another deck
-    Then validate that deck is unique
+  Scenario: Check that additional deck is unique
+    Given shuffle "new" 10 decks
+    When shuffle "additional" 10 decks
+    Then validate that additional deck is unique

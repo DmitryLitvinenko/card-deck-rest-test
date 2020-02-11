@@ -1,25 +1,42 @@
 package steps.defs;
 
-import io.cucumber.java.en.And;
+import elements.models.DeckResponse;
+import helpers.card.deck.CardDeckHelper;
+import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static util.JsonParser.parseJson;
+
+@ScenarioScoped
 public class CardDeckSteps {
+    private CardDeckHelper cardDeck = new CardDeckHelper();
 
-    @Given("shuffled deck")
-    public void shuffledDeck() {
+    private String deckResponse;
+    private String anotherDeckResponse;
+
+    @Given("shuffle {string} {int} deck(s)")
+    public void shuffleDeck(final String option, int deckAmount) {
+        String response;
+        response = cardDeck.shuffleCards(deckAmount);
+
+        DeckResponse actual = parseJson(response, DeckResponse.class);
+        cardDeck.validateDeckAfterShuffle(actual, deckAmount);
+
+        if (option.equals("new")) {
+            deckResponse = response;
+            assertThat(deckResponse)
+                    .withFailMessage("New deck is null").isNotNull();
+        } else {
+            anotherDeckResponse = response;
+            assertThat(anotherDeckResponse)
+                    .withFailMessage("Additional deck is null").isNotNull();
+        }
     }
 
-    @And("validate that deck has all parameters")
-    public void validateDeckParams() {
-    }
-
-    @When("shuffle another deck")
-    public void shuffleAnotherDeck() {
-    }
-
-    @Then("validate that deck is unique")
+    @Then("validate that additional deck is unique")
     public void validateThatDeckIsUnique() {
+        assertThat(deckResponse).isNotEqualTo(anotherDeckResponse).isNotNull();
     }
 }

@@ -1,9 +1,12 @@
 package helpers.card.deck;
 
+import elements.models.DeckResponse;
 import helpers.RequestHelper;
+import org.assertj.core.api.SoftAssertions;
 
 import static configuration.PropertiesConfiguration.getShuffleUrlPath;
 import static helpers.UrlHelper.buildDeckUrl;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class CardDeckHelper {
     private RequestHelper requestHelper = new RequestHelper();
@@ -31,5 +34,15 @@ public class CardDeckHelper {
         var url = buildDeckUrl().path("api/deck/" + deckId + "/shuffle/").build().toUriString();
 
         return requestHelper.sendGetRequest(url).extractBody();
+    }
+
+    public void validateDeckAfterShuffle(final DeckResponse actualJson, final int deckAmount) {
+        var cardsInOneDeck = 52;
+        SoftAssertions softly = new SoftAssertions();
+        assertThat(actualJson.getRemaining()).isEqualTo(cardsInOneDeck * deckAmount);
+        assertThat(actualJson.getDeckId()).isNotNull();
+        assertThat(actualJson.isShuffled()).isTrue();
+        assertThat(actualJson.isSuccess()).isTrue();
+        softly.assertAll();
     }
 }

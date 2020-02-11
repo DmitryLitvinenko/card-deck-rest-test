@@ -1,20 +1,19 @@
 package elements.models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class DeckResponse {
 
-    @JsonProperty("success")
+    @SerializedName("success")
     private boolean success;
-
-    @JsonProperty("shuffled")
+    @SerializedName("shuffled")
     private boolean shuffled;
-
-    @JsonProperty("deck_id")
+    @SerializedName("deck_id")
     private String deckId;
-
-    @JsonProperty("remaining")
+    @SerializedName("remaining")
     private int remaining;
 }
