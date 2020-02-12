@@ -6,9 +6,11 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources",
-        glue = "steps",
-        tags = "@drawCardValidation"
+        strict = true,
+        stepNotifications = true,
+        features = "classpath:features",
+        glue = "steps.definitions",
+        tags = "@all"
 )
 public class DefaultTestRunner extends AbstractTestRunner {
 }
