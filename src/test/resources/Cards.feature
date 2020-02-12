@@ -10,7 +10,13 @@ Feature: Cards from deck test
     Then check remaining cards
 
   @drawCardValidation
-  Scenario: Validate pulled cards from deck
+  Scenario Outline: Validate <cardAmount> pulled cards from deck
     Given shuffle new 10 deck
-    When draw 1 cards
+    When draw <cardAmount> cards
     Then validate card parameters
+    
+    Examples:
+      | cardAmount |
+      | 0          |
+      | 1          |
+      | 10         |
