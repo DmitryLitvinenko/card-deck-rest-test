@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class CardsResponse {
+public class CardsModel {
 
     @JsonProperty("cards")
     private List<CardsItem> cards;

@@ -1,6 +1,7 @@
 package helpers.card.deck;
 
-import elements.models.DeckResponse;
+import elements.models.CardsModel;
+import elements.models.DeckModel;
 import helpers.RequestHelper;
 import org.assertj.core.api.SoftAssertions;
 
@@ -34,13 +35,33 @@ public class CardDeckHelper {
         return requestHelper.sendGetRequest(url).extractBody();
     }
 
-    public void validateDeckAfterShuffle(final DeckResponse actualJson, final int deckAmount) {
+    public void validateDeckAfterShuffle(final DeckModel actualJson, final int deckAmount) {
         var cardsInOneDeck = 52;
         SoftAssertions softly = new SoftAssertions();
         assertThat(actualJson.getRemaining()).isEqualTo(cardsInOneDeck * deckAmount);
         assertThat(actualJson.getDeckId()).isNotNull();
         assertThat(actualJson.isShuffled()).isTrue();
         assertThat(actualJson.isSuccess()).isTrue();
+        softly.assertAll();
+    }
+
+    public void validateCardParameters(CardsModel cards, int drawCardAmount) {
+        final SoftAssertions softly = new SoftAssertions();
+        var pulledCardsAmount = cards.getCards().size();
+
+        softly.assertThat(pulledCardsAmount)
+                .withFailMessage("Pulled cards should be: " + drawCardAmount + ", but actual amount of cards is: " + pulledCardsAmount)
+                .isEqualTo(drawCardAmount);
+
+        if (pulledCardsAmount > 0) {
+            cards.getCards()
+                    .forEach(c -> {
+                        softly.assertThat(c.getImage()).isNotNull().isNotBlank();
+                        softly.assertThat(c.getValue()).isNotNull().isNotBlank();
+                        softly.assertThat(c.getSuit()).isNotNull().isNotBlank();
+                        softly.assertThat(c.getCode()).isNotNull().isNotBlank();
+                    });
+        }
         softly.assertAll();
     }
 }

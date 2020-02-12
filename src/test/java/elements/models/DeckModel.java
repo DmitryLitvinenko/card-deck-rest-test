@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DeckResponse {
+public class DeckModel {
 
     @SerializedName("success")
     private boolean success;

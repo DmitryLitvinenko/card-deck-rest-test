@@ -1,6 +1,6 @@
 package steps.defs;
 
-import elements.models.DeckResponse;
+import elements.models.DeckModel;
 import helpers.card.deck.CardDeckValuesHandler;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
@@ -20,7 +20,7 @@ public class DeckSteps extends CardDeckValuesHandler {
         String response;
         response = cd.shuffleCards(deckAmount);
 
-        deckResponseEntity = parseJson(response, DeckResponse.class);
+        deckResponseEntity = parseJson(response, DeckModel.class);
         cd.validateDeckAfterShuffle(deckResponseEntity, deckAmount);
 
         if (option.equals("new")) {
