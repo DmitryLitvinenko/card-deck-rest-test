@@ -2,6 +2,7 @@ package steps.defs;
 
 import elements.models.DeckResponse;
 import helpers.card.deck.CardDeckHelper;
+import helpers.card.deck.CardsDeckTestBase;
 import io.cucumber.guice.ScenarioScoped;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,11 +11,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static util.JsonParser.parseJson;
 
 @ScenarioScoped
-public class CardDeckSteps {
+public class DeckSteps extends CardsDeckTestBase {
+    //todo add dependency injection
     private CardDeckHelper cardDeck = new CardDeckHelper();
-
-    private String deckResponse;
-    private String anotherDeckResponse;
 
     @Given("shuffle {word} {int} deck(s)")
     public void shuffleDeck(final String option, final int deckAmount) {
