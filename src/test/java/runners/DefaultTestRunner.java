@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
+        plugin = {"pretty", "html:target/cucumber", "json:target/cucumber-report.json"},
         strict = true,
         stepNotifications = true,
         features = "classpath:features",
