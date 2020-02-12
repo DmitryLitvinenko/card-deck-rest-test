@@ -15,20 +15,15 @@ public class DeckSteps extends CardDeckValuesHandler {
     @Given("shuffle {word} {int} deck(s)")
     public void shuffleDeck(final String option, final int deckAmount) {
         shuffledDecksAmount = deckAmount;
-        String response;
-        response = cd.shuffleCards(deckAmount);
+        String response = cd.shuffleCards(deckAmount);
 
         deckResponseEntity = parseJson(response, DeckModel.class);
         cd.validateDeckAfterShuffle(deckResponseEntity, deckAmount);
 
         if (option.equals("new")) {
             deckResponse = response;
-            assertThat(deckResponse)
-                    .withFailMessage("New deck is null").isNotNull();
         } else {
             anotherDeckResponse = response;
-            assertThat(anotherDeckResponse)
-                    .withFailMessage("Another deck is null").isNotNull();
         }
     }
 
