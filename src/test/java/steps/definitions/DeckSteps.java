@@ -1,4 +1,4 @@
-package steps.defs;
+package steps.definitions;
 
 import elements.models.DeckModel;
 import helpers.card.deck.CardDeckValuesHandler;
