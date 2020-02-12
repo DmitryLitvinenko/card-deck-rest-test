@@ -3,12 +3,14 @@ package helpers.card.deck;
 import elements.models.CardsModel;
 import elements.models.DeckModel;
 import helpers.RequestHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.SoftAssertions;
 
 import static configuration.PropertiesConfiguration.getShuffleUrlPath;
 import static helpers.UrlHelper.buildDeckUrl;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@Slf4j
 public class CardDeckHelper {
     private RequestHelper requestHelper = new RequestHelper();
 
@@ -16,6 +18,7 @@ public class CardDeckHelper {
     private static final String DRAW_CARD_COUNT = "count";
 
     public String shuffleCards(final int deckCount) {
+        log.info("shuffling cards with deck count: " + deckCount);
         var url = buildDeckUrl().path(getShuffleUrlPath())
                 .queryParam(DECK_COUNT_PARAM, deckCount).build().toUriString();
 
@@ -23,6 +26,7 @@ public class CardDeckHelper {
     }
 
     public String drawCard(final String deckId, final int deckNumber) {
+        log.info("draw card with deck id: " + deckId + " and deck number: " + deckNumber);
         var url = buildDeckUrl().path("api/deck/" + deckId + "/draw/")
                 .queryParam(DRAW_CARD_COUNT, deckNumber).build().toUriString();
 
@@ -30,6 +34,7 @@ public class CardDeckHelper {
     }
 
     public String reshuffleCards(final String deckId) {
+        log.info("reshuffle cards with deck id: " + deckId);
         var url = buildDeckUrl().path("api/deck/" + deckId + "/shuffle/").build().toUriString();
 
         return requestHelper.sendGetRequest(url).extractBody();

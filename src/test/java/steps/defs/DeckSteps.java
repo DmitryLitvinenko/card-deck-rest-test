@@ -14,8 +14,6 @@ public class DeckSteps extends CardDeckValuesHandler {
 
     @Given("shuffle {word} {int} deck(s)")
     public void shuffleDeck(final String option, final int deckAmount) {
-        //todo add capture group, to handle only new and another
-        //todo steps should be logged in the output
         shuffledDecksAmount = deckAmount;
         String response;
         response = cd.shuffleCards(deckAmount);
