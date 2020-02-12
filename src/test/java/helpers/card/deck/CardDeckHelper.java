@@ -21,8 +21,6 @@ public class CardDeckHelper {
         return requestHelper.sendGetRequest(url).extractBody();
     }
 
-    public String shuffleCards() { return shuffleCards(1); }
-
     public String drawCard(final String deckId, final int deckNumber) {
         var url = buildDeckUrl().path("api/deck/" + deckId + "/draw/")
                 .queryParam(DRAW_CARD_COUNT, deckNumber).build().toUriString();
