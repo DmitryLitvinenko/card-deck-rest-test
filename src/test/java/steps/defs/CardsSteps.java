@@ -18,7 +18,7 @@ public class CardsSteps extends CardDeckValuesHandler {
     @When("draw {int} card(s)")
     public void drawCards(final int cardAmount) {
         drawCardAmount = cardAmount;
-        drawCardResponse = cd.drawCard(DECK_RESPONSE_ENTITY.getDeckId(), cardAmount);
+        drawCardResponse = cd.drawCard(deckResponseEntity.getDeckId(), cardAmount);
     }
 
     @Then("check remaining cards")
@@ -26,7 +26,7 @@ public class CardsSteps extends CardDeckValuesHandler {
         final CardsResponse cardsResponse = parseJson(drawCardResponse, CardsResponse.class);
 
         var cardsInOneDeck = 52;
-        var expectedRemaining = cardsInOneDeck * SHUFFLED_DECKS_AMOUNT - drawCardAmount;
+        var expectedRemaining = cardsInOneDeck * shuffledDecksAmount - drawCardAmount;
         assertThat(cardsResponse.getRemaining()).isEqualTo(expectedRemaining);
     }
 }
