@@ -55,7 +55,9 @@ public class CardDeckHelper {
         var pulledCardsAmount = cards.getCards().size();
 
         softly.assertThat(pulledCardsAmount)
-                .withFailMessage("Pulled cards should be: " + drawCardAmount + ", but actual amount of cards is: " + pulledCardsAmount)
+                .withFailMessage("Pulled cards should be: "
+                        + drawCardAmount
+                        + ", but actual amount of cards is: " + pulledCardsAmount)
                 .isEqualTo(drawCardAmount);
 
         if (pulledCardsAmount > 0) {
